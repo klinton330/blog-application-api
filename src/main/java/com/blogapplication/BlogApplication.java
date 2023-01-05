@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class BlogApplication {
 
 	public static void main(String[] args) {
-		System.out.println("I got a code")
+		System.out.println("I got a code");
+		System.out.println("I will write code");
 		SpringApplication.run(BlogApplication.class, args);
 	}
 
