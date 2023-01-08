@@ -1,7 +1,9 @@
 package com.blogapplication.controller;
 
 import com.blogapplication.payload.PostDTO;
+import com.blogapplication.payload.PostResponse;
 import com.blogapplication.service.PostService;
+import com.blogapplication.utils.AppConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,13 @@ public class PostController {
         return new ResponseEntity<>(postService.createPost(postDTO), HttpStatus.CREATED);
     }
     @GetMapping
-    public List<PostDTO> getAllPost(
-            @RequestParam(value = "pageNo",defaultValue = "0",required = false)int pageNo,
-            @RequestParam(value = "pageSize",defaultValue = "1",required = false)int pageSize)
+    public PostResponse getAllPost(
+            @RequestParam(value = "pageNo",defaultValue = AppConstants.DEFAULT_PAGE_NUMBER,required = false)int pageNo,
+            @RequestParam(value = "pageSize",defaultValue = AppConstants.DEFAULT_PAGE_SIZE,required = false)int pageSize,
+            @RequestParam(value = "sortBy",defaultValue = AppConstants.DEFAULT_SORT_BY,required = false)String sortBy,
+            @RequestParam(value="sortDir",defaultValue = AppConstants.DEFAULT_SORT_DIRECTION,required = false)String sortDir)
     {
-        return postService.getAllPost(pageNo,pageSize) ;
+        return postService.getAllPost(pageNo,pageSize,sortBy,sortDir) ;
     }
 
     @GetMapping("/{id}")
