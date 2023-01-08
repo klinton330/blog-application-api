@@ -6,6 +6,9 @@ import com.blogapplication.payload.PostDTO;
 import com.blogapplication.repository.PostRepository;
 import com.blogapplication.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,8 +30,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDTO> getAllPost() {
-        List <Post>getAllData=postRepository.findAll();
+    public List<PostDTO> getAllPost(int pageNo,int pageSize) {
+        Pageable pageAble= PageRequest.of(pageNo,pageSize);
+        Page<Post> posts=postRepository.findAll(pageAble);
+        List<Post> getAllData=posts.getContent();
         List <PostDTO>getEachData=new ArrayList();
         for(Post post:getAllData)
         {
