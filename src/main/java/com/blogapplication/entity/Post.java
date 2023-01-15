@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 
@@ -23,7 +24,7 @@ public class Post {
     private String description;
     @Column(name = "content",nullable = false)
     private String content;
-    @JsonIgnore
+
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Comment>comments=new HashSet<Comment>();
 }

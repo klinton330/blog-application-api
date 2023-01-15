@@ -8,6 +8,7 @@ import com.blogapplication.payload.CommentDTO;
 import com.blogapplication.repository.CommentRepository;
 import com.blogapplication.repository.PostRepository;
 import com.blogapplication.service.CommentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     public PostRepository postRepository;
@@ -82,20 +86,22 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public CommentDTO mapToDTO(Comment comment) {
-        CommentDTO commentDTO = new CommentDTO();
+        CommentDTO commentDTO=modelMapper.map(comment,CommentDTO.class);
+        /*CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
         commentDTO.setName(comment.getName());
         commentDTO.setBody(comment.getBody());
-        commentDTO.setEmail(comment.getEmail());
+        commentDTO.setEmail(comment.getEmail());*/
         return commentDTO;
     }
 
     public Comment mapToEntity(CommentDTO commentDTO) {
-        Comment comment = new Comment();
+        Comment comment=modelMapper.map(commentDTO,Comment.class);
+      /*  Comment comment = new Comment();
         comment.setId(commentDTO.getId());
         comment.setName(commentDTO.getName());
         comment.setEmail(commentDTO.getEmail());
-        comment.setBody(commentDTO.getBody());
+        comment.setBody(commentDTO.getBody());*/
         return comment;
     }
 
