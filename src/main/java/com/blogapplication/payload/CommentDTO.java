@@ -1,8 +1,6 @@
 package com.blogapplication.payload;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

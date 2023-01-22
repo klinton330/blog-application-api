@@ -5,11 +5,11 @@ import lombok.*;
 
 import jakarta.persistence.*;
 
-@Setter
-@Getter
+
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Setter
+@Getter
 @Entity
 @Table(name = "comments")
 public class Comment {

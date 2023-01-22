@@ -1,12 +1,15 @@
 package com.blogapplication.payload;
 
-import lombok.Data;
+import lombok.*;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+
 import java.util.Set;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostDTO {
 
     private long id;

@@ -1,9 +1,7 @@
 package com.blogapplication.payload;
 
 import com.blogapplication.entity.Post;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 @Data
@@ -11,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PostResponse {
 
-    private List<Post> content;
+    private List<PostDTO> content;
     private int pageNo;
     private  int pageSize;
     private  long totalElements;

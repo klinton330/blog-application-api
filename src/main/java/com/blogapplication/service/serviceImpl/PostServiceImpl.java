@@ -43,18 +43,21 @@ public class PostServiceImpl implements PostService {
         Pageable pageAble = PageRequest.of(pageNo, pageSize, sort);
         Page<Post> posts = postRepository.findAll(pageAble);
         List<Post> getAllData = posts.getContent();
+        System.out.println(getAllData);
         List<PostDTO> getEachData = new ArrayList();
         for (Post post : getAllData) {
             PostDTO p1 = mapToDTO(post);
             getEachData.add(p1);
         }
+        System.out.println(getEachData);
         PostResponse postResponse = new PostResponse();
-        postResponse.setContent(getAllData);
+        postResponse.setContent(getEachData);
         postResponse.setPageNo(posts.getNumber());
         postResponse.setPageSize(posts.getSize());
         postResponse.setTotalElements(posts.getTotalElements());
         postResponse.setTotalPages(posts.getTotalPages());
         postResponse.setLast(posts.isLast());
+        System.out.println(postResponse);
         return postResponse;
     }
 
@@ -62,6 +65,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(long id) {
         Post post = postRepository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Post", "Id", id));
+        System.out.println("Thepost"+post);
         return mapToDTO(post);
     }
 

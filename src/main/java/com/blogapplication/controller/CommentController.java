@@ -6,6 +6,7 @@ import com.blogapplication.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/posts/{postid}/comments")
+
     public ResponseEntity<CommentDTO> createNewComment( @PathVariable(value = "postid") long postid, @Valid @RequestBody CommentDTO commentDTO)
     {
         return new ResponseEntity<>(commentService.createComment(postid,commentDTO), HttpStatus.CREATED);
@@ -30,6 +32,7 @@ public class CommentController {
     }
 
     @GetMapping("/posts/{postId}/comments/{id}")
+
     public ResponseEntity<CommentDTO>getCommentById(@PathVariable(value = "postId") long postId,@PathVariable(value = "id")long commentId)
     {
         CommentDTO commentDTO=commentService.getCommentById(postId,commentId);
