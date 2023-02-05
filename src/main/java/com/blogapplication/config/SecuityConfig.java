@@ -1,10 +1,13 @@
 package com.blogapplication.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -19,6 +22,15 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecuityConfig {
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+      return authenticationConfiguration.getAuthenticationManager();
+    }
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception
     {
@@ -33,8 +45,8 @@ public class SecuityConfig {
     //In-Memory Authentication
 
 
-    @Bean
-    public UserDetailsService userDetails()
+
+   /* public UserDetailsService userDetails()
     {
         UserDetails hari= User.builder()
                 .username("hari")
@@ -48,8 +60,8 @@ public class SecuityConfig {
 
         return new InMemoryUserDetailsManager(hari,admin);
 
-    }
-    @Bean
+    }*/
+   @Bean
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder();

@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Set;
+import java.util.function.Supplier;
 
 @Setter
 @Getter
@@ -32,6 +34,7 @@ public class Users {
 
     )
     private Set<Role>roles;
+
 
 
 }
