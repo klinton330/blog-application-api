@@ -1,5 +1,6 @@
 package com.blogapplication.service.serviceImpl;
 
+import com.blogapplication.Security.JWTTokenProvider;
 import com.blogapplication.entity.Role;
 import com.blogapplication.entity.Users;
 import com.blogapplication.exception.BlogAPIException;
@@ -35,13 +36,17 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JWTTokenProvider jwtTokenProvider;
+
 
     @Override
     public String login(LoginDTO loginDTO) {
        Authentication authentication= authenticationManager.authenticate
                (new UsernamePasswordAuthenticationToken(loginDTO.getUserNameOrEmail(),loginDTO.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return "Logged In Successfully";
+        String token= jwtTokenProvider.generateToken(authentication);
+        return token;
     }
 
     @Override

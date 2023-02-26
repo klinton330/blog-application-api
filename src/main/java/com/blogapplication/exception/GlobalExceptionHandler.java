@@ -50,6 +50,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
                                                                WebRequest webRequest)
     {
+        exception.printStackTrace();
+        System.out.println("EXCEPTION:"+exception);
         ErrorDetails errorDetails=new ErrorDetails(new Date(),
                 exception.getMessage(),webRequest.getDescription(false));
         return new  ResponseEntity<ErrorDetails>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
