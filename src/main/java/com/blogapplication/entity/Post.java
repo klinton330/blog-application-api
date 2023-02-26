@@ -1,6 +1,5 @@
 package com.blogapplication.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -28,5 +27,8 @@ public class Post {
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Comment>comments=new HashSet<Comment>();
 
-
+    //Refer to parent entities -Many post have one catagory
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "catagory_id")
+    private Catagory catagory;
 }
