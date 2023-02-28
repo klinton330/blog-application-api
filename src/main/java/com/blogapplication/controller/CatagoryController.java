@@ -1,6 +1,8 @@
 package com.blogapplication.controller;
 
+import com.blogapplication.entity.Catagory;
 import com.blogapplication.payload.CatagoryDTO;
+import com.blogapplication.repository.CatagoryRepository;
 import com.blogapplication.service.CatagoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,12 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/catagory")
 public class CatagoryController {
 
     @Autowired
     private CatagoryService catagoryService;
+    @Autowired
+    private CatagoryRepository catagoryRepository;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -26,6 +32,20 @@ public class CatagoryController {
     public ResponseEntity<CatagoryDTO>getCatagory(@PathVariable("id") Long catagoryId)
     {
         return new ResponseEntity<>(catagoryService.getCatagory(catagoryId),HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CatagoryDTO>>getCatagories()
+    {
+        List<CatagoryDTO>catagoryDTOS=catagoryService.getAllCatagory();
+        return new ResponseEntity<>(catagoryDTOS,HttpStatus.OK);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<CatagoryDTO>updateCatagory(@RequestBody  CatagoryDTO catagoryDTO,@PathVariable("id") Long catagoryId)
+    {
+        CatagoryDTO catagoryDTO1=catagoryService.updateCatagory(catagoryDTO,catagoryId);
+        return new ResponseEntity<>(catagoryDTO1,HttpStatus.OK);
     }
 
 }

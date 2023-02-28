@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CatagoryImpl implements  CatagoryService {
 
@@ -31,4 +34,25 @@ public class CatagoryImpl implements  CatagoryService {
                 .orElseThrow(()->new ResourceNotFoundException("Catagory","id",catagoryId));
         return modelMapper.map(catagory,CatagoryDTO.class);
     }
+
+    @Override
+    public List<CatagoryDTO> getAllCatagory() {
+        List<Catagory>catagories=catagoryRepository.findAll();
+
+        return catagories
+                .stream()
+                .map((catagory)->modelMapper.map(catagory,CatagoryDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CatagoryDTO updateCatagory(CatagoryDTO catagoryDTO, Long id) {
+        //Check catagory is on db
+        Catagory catagory=catagoryRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Catagory","id",id));
+        catagory.setName(catagoryDTO.getName());
+        catagory.setDescription(catagoryDTO.getDescription());
+        Catagory catagory1=catagoryRepository.save(catagory);
+        return modelMapper.map(catagory1,CatagoryDTO.class);
+    }
+
+
 }
