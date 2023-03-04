@@ -18,8 +18,6 @@ public class CatagoryController {
 
     @Autowired
     private CatagoryService catagoryService;
-    @Autowired
-    private CatagoryRepository catagoryRepository;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -42,10 +40,20 @@ public class CatagoryController {
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CatagoryDTO>updateCatagory(@RequestBody  CatagoryDTO catagoryDTO,@PathVariable("id") Long catagoryId)
     {
         CatagoryDTO catagoryDTO1=catagoryService.updateCatagory(catagoryDTO,catagoryId);
         return new ResponseEntity<>(catagoryDTO1,HttpStatus.OK);
     }
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String>deleteCatagory(@PathVariable("id") Long id)
+    {
+        catagoryService.deleteCatagory(id);
+        return ResponseEntity.ok("Catagory Deleted Successfully");
+    }
+
+
 
 }

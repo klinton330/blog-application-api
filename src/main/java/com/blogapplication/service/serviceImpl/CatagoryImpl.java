@@ -54,5 +54,11 @@ public class CatagoryImpl implements  CatagoryService {
         return modelMapper.map(catagory1,CatagoryDTO.class);
     }
 
+    @Override
+    public void deleteCatagory(Long Id) {
+        Catagory catagory=catagoryRepository.findById(Id).orElseThrow(()->new ResourceNotFoundException("Catagory","id",Id));
+        catagoryRepository.delete(catagory);
+    }
+
 
 }
