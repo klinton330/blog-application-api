@@ -4,6 +4,7 @@ import com.blogapplication.entity.Catagory;
 import com.blogapplication.payload.CatagoryDTO;
 import com.blogapplication.repository.CatagoryRepository;
 import com.blogapplication.service.CatagoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/catagory")
+@SecurityRequirement(name = "bearerAuth")
 public class CatagoryController {
 
     @Autowired

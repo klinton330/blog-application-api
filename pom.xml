@@ -11,7 +11,7 @@
 	<groupId>com.blogapplication</groupId>
 	<artifactId>blog-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>blog-application</name>
 	<description>API for Blog Website</description>
 	<properties>
@@ -83,6 +83,21 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.15</version>
+		</dependency>
+
+
+
 
 
 
@@ -101,6 +116,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>BlogApplicationApi</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
